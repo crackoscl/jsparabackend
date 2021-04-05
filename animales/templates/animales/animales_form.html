@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <form method="post" class="js-new-animales-form">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    <div class="col-sm-1">
+                        <p class="add-param">{{ form.especie.label }}</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="add-param">{{ form.especie }}</p>
+                    </div>
+                    <div class="col-sm-1">
+                        <p class="add-param">{{ form.nombre.label }}</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="add-param">{{ form.nombre }}</p>
+                    </div>
+                    <div class="col-sm-1">
+                        <p class="add-param">{{ form.numero.label }}</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="add-param">{{ form.numero }}</p>
+                    </div>
+                    <div class="col-sm-1">
+                        <p class="add-param"><input type="submit" value="Submit"></p>
+                    </div>
+                    <p class="add-param hidden">{{ form.comida.label }}</div>
+                    <p class="add-param hidden">{{ form.comida }}</p>
+                    <p class="add-param hidden">{{ form.user_id.label }}</p>
+                    <p class="add-param hidden">{{ form.user_id }}</p>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-6"></div>
+    </div>
+</div>

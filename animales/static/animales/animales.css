@@ -1,0 +1,31 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 100px;
+    background-color: #2196F3;
+    padding: 10px;
+}
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+.grid-container-smaller {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 0px;
+    background-color: #2196F3;
+    /*padding: 10px;*/
+}
+.grid-item-smaller {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 0px;
+    font-size: 30px;
+    text-align: center;
+}
+.add-param {
+    padding: 2px;
+}

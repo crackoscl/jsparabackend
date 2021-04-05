@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block login %}
+    <div class="grid-item">
+        {% if user.is_authenticated %}
+            Welcome, {{ user.username }}.
+            <p><a href="{% url 'logout' %}">Log Out</a></p>
+        {% else %}
+            <p>Please log in.<a href="{% url 'login' %}">Log In</a></p>
+            <p>Or create an account <a href="{% url 'signup' %}">here</a></p>
+        {% endif %}
+    </div>
+{% endblock %}

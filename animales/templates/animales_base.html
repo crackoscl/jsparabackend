@@ -1,0 +1,40 @@
+{% load i18n %}
+{% load static %}
+<!doctype html>
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
+<head>
+    <meta charset="utf-8">
+    <title>{% translate "Animales" %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block stylesheets %}
+        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="/static/admin/css/fonts.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'animales/style.css' %}">
+    {% endblock %}
+    {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    {% endblock %}
+</head>
+<body>
+<header class="u-clearfix">
+    <div class="logo">
+        <a href="https://www.djangoproject.com/" target="_blank" rel="noopener">
+            <h2>django</h2>
+        </a>
+    </div>
+</header>
+<main>
+    <h2>Inside</h2>
+    {% block login %}
+    {% endblock %}
+</main>
+
+{% block content %}
+{% endblock %}
+
+<footer class="u-clearfix">
+</footer>
+</body>
+</html>

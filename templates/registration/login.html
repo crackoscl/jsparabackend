@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block login %}
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="fieldWrapper">
+                <label for="{{ form.username.id_for_label }}">Username:</label>
+                {{ form.username }}
+            </div>
+            <div class="fieldWrapper">
+                <label for="{{ form.password.id_for_label }}">Password:</label>
+                {{ form.password }}
+            </div>
+            <div class="fieldWrapper">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+{% endblock %}

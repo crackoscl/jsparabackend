@@ -1,0 +1,85 @@
+{% extends 'animales_base.html' %}
+{% load static %}
+
+{% block stylesheets %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'animales/animales.css' %}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ block.super }}
+    <script>let csrftoken = '{{ csrf_token }}'</script>
+    <script src="{% static 'animales/AnimalesApp.js' %}" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            let $wrapper = $('.js-animales-table');
+            let animalesApp = new AnimalesApp($wrapper);
+        });
+    </script>
+{% endblock %}
+
+{% block login %}
+    {% if user.is_authenticated %}
+        Welcome, {{ user.username }}.
+        <p><a href="{% url 'logout' %}">Log Out</a></p>
+    {% else %}
+        <p>Please log in.<a href="{% url 'login' %}">Log In</a></p>
+        <p>Or create an account <a href="{% url 'signup' %}">here</a></p>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5 js-animales-table">
+                <table class="table table-striped">
+                    <thead>
+                    <th>Id</th>
+                    <th>Especie</th>
+                    <th>Nombre</th>
+                    <th>Numero</th>
+                    <th>Comida (sacos/dia)</th>
+                    </thead>
+                    <tbody class="extbody">
+                    {% for animal in animales %}
+                        {% include 'animales/animales_row.html' %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="row total-comida">
+                    <div class="col-sm-5"></div>
+                    <div class="col-sm-2">
+                        <p><b>Total:</b></p>
+                    </div>
+                    <div class="col-sm-5">
+                        <p class="js-total-comida">{{ total_comida }}</p>
+                    </div>
+                </div>
+                <div class="js-new-animales-form-wrapper">
+                    {% include "animales/animales_form.html" %}
+                </div>
+
+            <div class="col-sm-1"></div>
+            <div class="col-sm-5">
+                <h3><i>Tabla de alimentadores</i></h3>
+                <table class="table table-striped">
+                    <thead>
+                    <th>Humano</th>
+                    <th>Sacos de comida</th>
+                    </thead>
+                    <tbody>
+                        {% for nombre, cantidad in alimentadores.items %}
+                            <tr>
+                                <td>{{ nombre }}</td>
+                                <td>{{ cantidad }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div></div>
+            <div class="col-sm-1"></div>
+        </div>
+    </div>
+{% endblock %}
+
