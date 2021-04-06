@@ -102,48 +102,63 @@
             e.preventDefault();
 
             let $link = $(e.currentTarget);
-            console.log($link)
-
-            $link.addClass('text-blue');
-            $link.find('.fa')
-                .removeClass('fa-edit')
-                .addClass('fa-save');
-
-            let updateurl = $link.data('url'); //url de envio
-            let $row = $link.closest('tr');
             
-            lista = $row.find('td')
-            for (let index = 1; index < lista.length -1; index++) {
-                lista[index].setAttribute("contenteditable",true)
+            if ($link.find('.fa-edit').length ===1){
+                $link.addClass('text-blue');
+                $link.find('.fa')
+                    .removeClass('fa-edit')
+                    .addClass('fa-save');
+                
+                let $row = $link.closest('tr');
+                lista = $row.find('td')
+                for (let index = 1; index < lista.length -1; index++) {
+                    lista[index].setAttribute("contenteditable",true)
+                }
+            }else{
+                $link.addClass('text-blue');
+                $link.find('.fa')
+                    .removeClass('fa-save')
+                    .addClass('fa-edit');
+                    let $row = $link.closest('tr');
+                    lista = $row.find('td')
+                    for (let index = 1; index < lista.length -1; index++) {
+                        lista[index].setAttribute("contenteditable",false)
+                        //console.log(lista[index].innerText)
+                    }
+                 datajson = {
+                    'especie':lista[1].innerText,
+                    'nombre':lista[2].innerText,
+                    'numero':lista[3].innerText,
+                    'comida':lista[4].innerText,
+                    'id':lista[0].innerText,
+                }
+                
+                that = this;
+                json_data = JSON.stringify(datajson)
+             
+                 let updatedata = $link.data('url');
+                 $.ajax({
+                     url: updatedata,
+                     method: 'POST',
+                     data: json_data,
+                     dataType: 'json',
+                     contentType: 'application/json',
+                 })
+                     .done(function(d) {
+                         //$tbody.append(d);
+                         that.updateTotalComida();
+                     })
+                     .fail(function() {
+                         console.log("error");
+                     })
+                     .always(function() {
+                         console.log("complete");
+                     });
+                 
+                     
+                 //let that = this;
+                
             }
-            
-            //lista.setAttribute("contenteditable",true)
-            
-            console.log("aqui",$link)
-        
-
-
-            //let that = this;
-
-
-            // $.ajax({
-            //     url: deleteUrl,
-            //     method: 'POST',
-            //     data: {csrfmiddlewaretoken: csrftoken}
-            // })
-            //     .done(function (data) {
-            //         console.log(data);
-            //         $row.fadeOut('normal', function () {
-            //             $(this).remove();
-            //             that.updateTotalComida();
-            //         });
-            //     })
-            //     .fail(function () {
-            //         console.log("error");
-            //     })
-            //     .always(function () {
-            //         console.log("completado");
-            //     });
         }
     });
 
